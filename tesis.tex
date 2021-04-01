@@ -1,0 +1,119 @@
+\documentclass[12pt,twoside]{book}
+
+% Palabras clave en distintos idiomas
+\usepackage[activeacute,spanish]{babel}
+
+% Patrones para division en silabas
+\hyphenation{par-ti-cu-lar}
+
+% Inclusion de imagenes
+\usepackage{graphicx}
+
+% Codificacion de simbolos
+\usepackage[T1]{fontenc}
+\usepackage[applemac]{inputenc}
+
+% Fuentes y simbolos adicionales
+\usepackage{amsfonts}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{mathrsfs}
+
+% Algoritmos
+\usepackage[ruled,lined,linesnumbered,commentsnumbered]{algorithm2e}
+
+%\usepackage[all]{xy}
+
+% Ambientes de teorema y demostracion
+\usepackage{amsthm}
+
+% Generacion de dibujos con TeX
+\usepackage{tikz}
+\usetikzlibrary{arrows,shapes,matrix,decorations.pathmorphing}
+
+% Ajuste de parametros en la pagina
+\usepackage{geometry}
+
+% Ubicacion precisa de floats
+\usepackage{float}
+
+% Definiciones de teoremas
+\newtheorem{teorema}{Teorema}[section]
+\newtheorem{lema}[teorema]{Lema}
+\newtheorem{proposicion}[teorema]{Proposici\'on}
+\newtheorem{corolario}[teorema]{Corolario}
+
+% Definiciones de ambientes adicionales
+\theoremstyle{definition}
+\newtheorem{definicion}[teorema]{Definici\'on}
+
+% Manejo de encabezados
+\usepackage{fancyhdr}
+
+% Estilo de encabezados
+\pagestyle{fancy}
+\renewcommand{\chaptermark}[1]{\markboth{#1}{}}
+\renewcommand{\sectionmark}[1]{\markright{\thesection\ #1}}
+\fancyhf{}
+\fancyhead[LE,RO]{\textsc{\bfseries\nouppercase\thepage}}
+\fancyhead[LO]{\textsc{\bfseries\nouppercase\rightmark}}
+\fancyhead[RE]{\textsc{\bfseries\nouppercase\leftmark}}
+\renewcommand{\headrulewidth}{0.5pt}
+\renewcommand{\footrulewidth}{0pt}
+\addtolength{\headheight}{0.5pt}
+\fancypagestyle{plain}{
+  \fancyhead{}
+  \renewcommand{\headrulewidth}{0pt}
+}
+
+% Delimitadores para terminar las demostraciones
+\newcommand{\blackqed}{\hfill$\blacksquare$}
+\newcommand{\whiteqed}{\hfill$\square$}
+\newcounter{proofcount}
+
+% Redefinicion para que las demostraciones terminen con cuadrito negro
+\renewenvironment{proof}[1][\proofname.]{\par
+\ifnum \theproofcount>0 \pushQED{\whiteqed} \else \pushQED{\blackqed} \fi%
+\refstepcounter{proofcount}
+%
+\normalfont %\topsep6\p@\@plus6\p@\relax
+\trivlist
+\item[\hskip\labelsep
+\itshape
+\textbf{\textit{#1}}]\ignorespaces
+}{%
+\addtocounter{proofcount}{-1}
+\popQED\endtrivlist
+}
+
+% Para generar la tabla de contenidos
+\usepackage{makeidx}
+
+% Generacion de tabla de contenidos
+\makeindex
+
+\begin{document}
+
+\frontmatter
+
+\include{caratula}
+\include{hojadedatos}
+\tableofcontents
+
+
+\mainmatter
+
+\include{intro}
+\include{cap1}
+
+
+%\appendix
+%\include{Ap1}
+
+\backmatter
+
+\printindex
+
+\include{biblio}
+
+\end{document}

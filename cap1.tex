@@ -1,0 +1,702 @@
+\chapter{Preliminares}
+
+
+\section{Gr\'aficas}
+
+Una \textbf{\textit{gr\'afica}}\index{gr\'afica}, $G$, es una terna ordenada $(V(G),E(G), \psi_G)$, compuesta por un
+conjunto de v\'ertices, $V(G)$, un conjunto de aristas, $E(G)$, los cuales son ajenos entre si, y una funci\'on de
+adyacencia, $\psi_G$, que le asocia a cada arista de $G$ un par no ordenado de v\'ertices (no necesariamente
+distintos). Si $e$ es una arista y $u$ y $v$ son v\'ertices tales que $\psi_G(e) = \{u,v\}$, entonces se dice que $e$
+une a $u$ y a $v$ y los v\'ertices $u$ y $v$ se llaman extremos de $e$.
+Para denotar a la pareja no ordenada $\{u,v\}$ escribiremos $uv$.
+Dos v\'ertices que son incidentes con una arista en com\'un se dice que son adyacentes o vecinos, asi como dos
+aristas que son incidentes con un v\'ertice en com\'un. Al conjunto de v\'ertices adyacentes o vecinos a un v\'ertice
+$v$ le llamamos vecindad de $v$ y la denotamos $N(v)$.
+Al n\'umero de v\'ertices en G se le denota $v(G)$ y se le llama orden de $G$.
+Al n\'umero de aristas en G se le denota $e(G)$ y se le llama tama\~no de $G$.
+
+\begin{figure}[ht]
+    \begin{center}
+        \begin{tikzpicture}
+        [every circle node/.style ={circle,draw,minimum size= 5pt,inner sep=0pt, outer sep=0pt},
+            every rectangle node/.style ={}]
+            ;
+
+            \begin{scope}[scale=0.5]
+                \node [circle] (1) at (90:3)[label=90:$v_2$]{};
+                \node[circle] (2) at (210:3)[label=135:$v_1$]{};
+                \node[circle] (3) at (330:3)[label=45:$v_3$]{};
+                \node [circle] (4) at (4.5,2)[label=270:$v_4$]{};
+                \node (g) at (-4.5,3.5)[]{$G$};
+
+
+                %\draw [-, shorten <=3pt, shorten >=3pt, >=stealth, line width=.7pt] (2) to [bend right=30]
+                %node[below] {$e_6$} (3);
+                %\draw [-, shorten <=3pt, shorten >=3pt, >=stealth, line width=.7pt] (2) to node[left] {$e_1$} (1);
+                %\draw [-, shorten <=3pt, shorten >=3pt, >=stealth, line width=.7pt] (2) to node[above] {$e_3$} (3);
+                %\draw [-, shorten <=3pt, shorten >=3pt, >=stealth, line width=.7pt] (1) to node[right] {$e_2$} (3);
+                %\draw [-, shorten <=3pt, shorten >=3pt, >=stealth, line width=.7pt] (1) to node[above] {$e_4$} (4);
+                %\path [-, shorten <=3pt, shorten >=3pt, >=stealth, line width=.7pt, out=0, in=45, looseness=20, loop,
+                %distance=3cm] (4) edge[loop left, bend right=50] node[right] {$e_5$} (4);
+            \end{scope}
+
+
+            \begin{scope}[xshift=7.5cm, scale=0.5]
+                \node [circle] (1) at (90:3)[label=90:$v_2$]{};
+                \node[circle] (2) at (210:3)[label=135:$v_1$]{};
+                \node[circle] (3) at (330:3)[label=45:$v_3$]{};
+                \node [circle] (4) at (4.5,2)[label=270:$v_4$]{};
+                \node (g) at (-4.5,3.5)[]{$H$};
+
+                %\draw [-, shorten <=3pt, shorten >=3pt, >=stealth, line width=.7pt] (2) to [bend right=30]
+                %node[below] {$e_6$} (3);
+                %\draw [-, shorten <=3pt, shorten >=3pt, >=stealth, line width=.7pt] (2) to node[left] {$e_1$} (1);
+                %\draw [-, shorten <=3pt, shorten >=3pt, >=stealth, line width=.7pt] (1) to node[right] {$e_2$} (3);
+                %\draw [-, shorten <=3pt, shorten >=3pt, >=stealth, line width=.7pt] (1) to node[above] {$e_4$} (4);
+            \end{scope}
+
+
+        \end{tikzpicture}
+    \end{center}\caption{Ejemplo de una gr\'afica $G$=$(V(G),E(G))$ donde $V(G)$=$\{v_1,v_2,v_3,v_4\}$, $E(G)
+    $=$\{e_1,e_2,e_3,e_4,e_5,e_6\}$, $\psi_G(e_1)$ = $v_1v_2$, $\psi_G(e_2)$ = $v_2v_3$, $\psi_G(e_3)$ = $v_1v_3$,
+        $\psi_G(e_4)$ = $v_2v_4$, $\psi_G(e_5)$ = $v_4$ y $\psi_G(e_6)$ = $v_1v_3$. Adem\'as $H$ subgr\'afica de $G$,
+        donde $H$=$(V(H), E(H))$, $V(H)$=$\{v_1, v_2, v_3, v_4\}$, $E(H)$=$\{e_1, e_2, e_4, e_6\}$ y
+        $\psi_H$=$\psi_G\big|_{E(H)}$.}
+\end{figure}
+
+
+\index{subgr\'afica}
+Una gr\'afica $H$ se llama \textbf{\textit{subgr\'afica}} de la gr\'afica $G$ si $V(H) \subseteq V(G)$, $E(H)
+\subseteq E(G)$ y $\psi_H$ es la restricci\'on de $\psi_G$ a las aristas de $H$, es decir $\psi_H$=$\psi_G$$\big|_{E
+(H)}$; entonces decimos que $G$ contiene a $H$. Si $X \subseteq V(G)$, la subgr\' afica de $G$ inducida por $X$ es la
+gr\' afica $G[X]$ tal que $V(G[X]) = X$ y donde $uv \in E(G[X])$ si y s\'olo si $uv \in E(G)$.
+
+Un\textbf{\textit{ lazo}} es una arista que tiene sus dos extremos iguales.
+\index{gr\'afica!vac\'ia}
+Una \textbf{\textit{gr\'afica vac\'ia}} es aquella que no tiene aristas.
+Cuando la gr\'afica tiene un solo v\'ertice decimos que es una gr\'afica \textbf{\textit{trivial}} y en cualquier
+otro caso decimos que es \textbf{\textit{no trivial}}.
+\index{gr\'afica!finita}
+Una \textbf{\textit{gr\'afica finita}} es en la que el conjunto de v\'ertices y aristas es finito.
+\index{gr\'afica!simple}
+Decimos que una gr\'afica es \textbf{\textit{simple}} si aristas distintas tienen extremos distintos y adem\'as no
+tiene lazos.
+
+
+En este trabajo nosotros s\'olo nos referiremos a gr\'aficas simples y a gr\'aficas finitas, entonces a partir de
+este punto siempre que mencionemos una gr\'afica nos estaremos refiriendo a una gr\'afica simple y finita.
+
+Por tanto observemos que para que $H$ sea subgr\'afica de $G$ basta ver que $V(H) \subseteq V(G)$ y $E(H) \subseteq E
+(G)$ (observemos que ya que son gr\'aficas simples podemos omitir a la funci\'on de adyacencia y pensar a $G$ como
+una pareja $G=(V,E)$ donde $V$ es un conjunto distinto al vacio y $E \subseteq  [V]^2 = \left\{ S\subseteq V\big| |s|
+=2\right\}$, es decir no habr\'an lazos ni aristas distintas con los mismos extremos).
+
+\index{gr\'afica!id\'entica}
+Decimos que dos gr\'aficas $G$ y $H$ son \textbf{\textit{id\'enticas}} si $V(G) =V(H)$ y $E(G)=E(H)$, y lo denotamos
+por $G = H$.
+\index{gr\'afica!isomorfas}
+Dos gr\'aficas $G$ y $H$ son \textbf{\textit{isomorfas}}, $G\cong H$, si existe una funci\'on biyectiva $\rho : V(G)
+\to V(H)$  tal que $xy \in E(G)$ si y s\'olo si $\rho(x)\rho(y) \in E(H)$
+
+\begin{figure}[ht]
+    \begin{center}
+        \begin{tikzpicture}
+        [every circle node/.style ={circle,draw,minimum size= 5pt,inner sep=0pt, outer sep=0pt},
+            every rectangle node/.style ={}]
+            ;
+
+            \begin{scope}[yshift=-0.5cm, scale=0.5]
+                \node [circle] (1) at (90:3)[label=90:$v_1$]{};
+                \node[circle] (2) at (210:3)[label=135:$v_2$]{};
+                \node[circle] (3) at (330:3)[label=45:$v_3$]{};
+                \node [circle] (4) at (4.5,2)[label=270:$v_4$]{};
+                \node (g) at (-4.5,4)[]{$G$};
+
+
+                %\draw [-, shorten <=3pt, shorten >=3pt, >=stealth, line width=.7pt] (2) to node[below] {$e_2$} (3);
+                %\draw [-, shorten <=3pt, shorten >=3pt, >=stealth, line width=.7pt] (2) to node[left] {$e_1$} (1);
+                %\draw [-, shorten <=3pt, shorten >=3pt, >=stealth, line width=.7pt] (1) to node[right] {$e_3$} (3);
+                %\draw [-, shorten <=3pt, shorten >=3pt, >=stealth, line width=.7pt] (1) to node[above] {$e_4$} (4);
+            \end{scope}
+
+            \begin{scope}[xshift=7.5cm, scale=0.5]
+                \node [circle] (1) at (270:3)[label=270:$v$]{};
+                \node[circle] (2) at (30:3)[label=45:$u$]{};
+                \node[circle] (3) at (150:3)[label=135:$w$]{};
+                \node [circle] (4) at (0,0)[label=90:$x$]{};
+                \node (g) at (-4.5,3.5)[]{$G'$};
+
+                %\draw [-, shorten <=3pt, shorten >=3pt, >=stealth, line width=.7pt] (2) to [bend right=30]
+                %node[above] {$b$} (3);
+                %\draw [-, shorten <=3pt, shorten >=3pt, >=stealth, line width=.7pt] (2) to [bend left=30]
+                %node[right] {$a$} (1);
+                %\draw [-, shorten <=3pt, shorten >=3pt, >=stealth, line width=.7pt] (1) to [bend left=30] node[left]
+                %    {$c$} (3);
+                %\draw [-, shorten <=3pt, shorten >=3pt, >=stealth, line width=.7pt] (1) to node[left] {$d$} (4);
+            \end{scope}
+
+
+        \end{tikzpicture}
+    \end{center}\caption{ Podemos observar que la gr\'afica $G$ es isomorfa a la gr\'afica $G'$ }
+\end{figure}
+
+
+
+\index{gr\'afica!completa}
+Una \textbf{\textit{gr\'afica completa}} es una gr\'afica simple en la cual cada par de v\'ertices distintos se une
+por una arista.
+\index{gr\'afica!bipartita}
+Una \textbf{\textit{gr\'afica bipartita}} es aquella en la cual sus v\'ertices se pueden dividir en dos conjuntos $X$
+y $Y$, ajenos y no vacios, de forma que cada arista tiene un extremo en $X$ y otro en $Y$.
+Entonces $(X,Y)$ se llama bipartici\'on de la gr\'afica.
+\index{gr\'afica!bipartita completa}
+Una \textbf{\textit{gr\'afica bipartita completa}} es una gr\'afica bipartita simple con una bipartici\'on $(X,Y)$ en
+la que cada v\'ertice de $X$ se une con cada v\'ertice de $Y$.
+
+Si \big|$X\big|=m$ \  \  y \  \  \big|$Y\big|=n$ entonces esta gr\'afica se denota $ K_{m,n}$.
+
+
+\begin{figure}[ht]
+    \begin{center}
+        \begin{tikzpicture}
+        [every circle node/.style ={circle,draw,minimum size= 5pt,inner sep=0pt, outer sep=0pt},
+            every rectangle node/.style ={}]
+            ;
+
+            \begin{scope}[xshift=-5cm, scale=0.5]
+                \node [circle] (1) at (0:0)[label=180:$v_1$]{};
+                \node (g) at (0,3.5)[]{$K_1$};
+            \end{scope}
+
+            \begin{scope}[xshift=-3cm, scale=0.5]
+                \node [circle] (1) at (0:1.5)[label=0:$v_1$]{};
+                \node [circle] (2) at (180:1.5)[label=180:$v_2$]{};
+                %\foreach \from/\to in {1/2}
+                %\draw [-, shorten <=3pt, shorten >=3pt, >=stealth, line width=.7pt] (\from) to  (\to);
+                \node (g) at (0,3.5)[]{$K_2$};
+            \end{scope}
+
+            \begin{scope}[xshift=0cm, scale=0.5]
+                \node [circle] (1) at (90:2)[label=180:$v_1$]{};
+                \node [circle] (2) at (210:2)[label=210:$v_2$]{};
+                \node [circle] (3) at (330:2)[label=330:$v_3$]{};
+                %\foreach \from/\to in {1/2,1/3,2/3}
+                %\draw [-, shorten <=3pt, shorten >=3pt, >=stealth, line width=.7pt] (\from) to  (\to);
+                \node (g) at (0,3.5)[]{$K_3$};
+            \end{scope}
+
+            \begin{scope}[xshift=3cm, scale=0.5]
+                \node [circle] (1) at (90:2)[label=180:$v_1$]{};
+                \node [circle] (2) at (180:2)[label=180:$v_2$]{};
+                \node [circle] (3) at (270:2)[label=270:$v_3$]{};
+                \node [circle] (4) at (360:2)[label=360:$v_4$]{};
+                %\foreach \from/\to in {1/2,1/3,1/4,2/3,2/4,3/4}
+                %\draw [-, shorten <=3pt, shorten >=3pt, >=stealth, line width=.7pt] (\from) to  (\to);
+                \node (g) at (0,3.5)[]{$K_4$};
+            \end{scope}
+
+            \begin{scope}[xshift=6cm, scale=0.5]
+                \node [circle] (1) at (72:2)[label=72:$v_1$]{};
+                \node [circle] (2) at (144:2)[label=144:$v_2$]{};
+                \node [circle] (3) at (216:2)[label=216:$v_3$]{};
+                \node [circle] (4) at (288:2)[label=288:$v_4$]{};
+                \node [circle] (5) at (360:2)[label=360:$v_5$]{};
+                %\foreach \from/\to in {1/2,1/3,1/4,1/5,2/3,2/4,2/5,3/4,3/5,4/5}
+                %\draw [-, shorten <=3pt, shorten >=3pt, >=stealth, line width=.7pt] (\from) to  (\to);
+                \node (g) at (0,3.5)[]{$K_5$};
+            \end{scope}
+        \end{tikzpicture}
+    \end{center}\caption{Gr\'aficas completas de orden menor o igual a 5}
+\end{figure}
+
+
+
+
+
+\begin{figure}[ht]
+    \begin{center}
+        \begin{tikzpicture}
+        [every circle node/.style ={circle,draw,minimum size= 5pt,inner sep=0pt, outer sep=0pt},
+            every rectangle node/.style ={}]
+            ;
+
+            \begin{scope}[xshift=0cm, scale=0.7]
+                \node [circle] (x_1) at (0,0)[label=180:$x_1$]{};
+                \node [circle] (x_2) at (0,2)[label=180:$x_2$]{};
+                \node [circle] (x_3) at (0,4)[label=180:$x_3$]{};
+                \node [circle] (x_4) at (0,6)[label=180:$x_4$]{};
+                \node [circle] (y_1) at (5,1)[label=0:$y_1$]{};
+                \node [circle] (y_2) at (5,3)[label=0:$y_2$]{};
+                \node [circle] (y_3) at (5,5)[label=0:$y_3$]{};
+
+                %\foreach \from/\to in {x_1/y_1,x_1/y_2,x_1/y_3,x_2/y_1,x_2/y_2,x_2/y_3,x_3/y_1,x_3/y_2,x_3/y_3,
+                %x_4/y_1,x_4/y_2,x_4/y_3}
+                %\draw [-, shorten <=3pt, shorten >=3pt, >=stealth, line width=.7pt] (\from) to  (\to);
+
+            \end{scope}
+        \end{tikzpicture}
+    \end{center}\caption{Gr\'afica bipartita completa $K_{4,3}$ }
+\end{figure}
+
+
+\begin{definicion}
+    \index{camino}     Un\textbf{\textit{ camino}} en $G$ es una sucesi\'on finita $W= v_0e_1v_1e_2v_2, \dots ,
+    e_kv_k$ de v\'ertices y aristas alternadas, donde $1 \le i \le k$. Los extremos de $e_i$ son $v_{i-1}$ y $v_i$ y
+    decimos que $W$ es un camino de $v_0$ a $v_k$. Llamamos a $v_0$ y a $v_k$ inicio y t\'ermino de $W$
+    respectivamente, a los dem\'as v\'ertices de $W$, $v_1, v_2, \dots,v_{k-1}$, los conocemos como v\'ertices
+    internos. La \textbf{\textit{longitud}} \index{longitud} de $W$ es el entero $k$. En una gr\'afica simple un
+    camino $W = v_0e_1v_1e_2v_2, \dots ,e_kv_k$ se determina por una sucesi\'on $v_0, v_1, \dots, v_k$ de los
+    v\'ertices de $W$, por tanto un camino en una gr\'afica simple se puede expresar simplemente por su sucesi\'on de
+    v\'ertices.
+    Si las aristas $e_1,e_2,e_3,..., e_k$ de un camino son distintas entonces decimos que es un
+    \textbf{\textit{paseo}}\index{camino!paseo}.
+    Si los v\'ertices $v_1,v_2,v_3,...,v_k$ de un camino son distintos entonces la llamamos
+    \textbf{\textit{trayectoria}}\index{camino!trayectoria},
+    donde $v_1$ y $v_k$ son los extremos de la trayectoria.
+    Un \textbf{\textit{camino cerrado}}\index{camino!camino cerrado} $\mathscr{C}$, es un camino en el cual los
+    extremos son el mismo v\'ertice, $\mathscr{C} = v_0 v_1 \dots v_k=v_0$. Un
+    \textbf{\textit{ciclo}}\index{camino!ciclo} es un camino cerrado que no repite v\'ertices salvo el primero y el
+    \'ultimo.
+
+
+    \begin{figure}[ht]
+        \begin{center}
+            \begin{tikzpicture}
+            [every circle node/.style ={circle,draw,minimum size= 5pt,inner sep=0pt, outer sep=0pt},
+                every rectangle node/.style ={}]
+                ;
+                \begin{scope}[xshift=6cm, scale=0.7]
+
+                    \node [circle] (1) at (72:2)[label=72:$v_1$]{};
+                    \node [circle] (2) at (144:2)[label=144:$v_2$]{};
+                    \node [circle] (3) at (216:2)[label=216:$v_3$]{};
+                    \node [circle] (4) at (288:2)[label=288:$v_4$]{};
+                    \node [circle] (5) at (360:2)[label=360:$v_5$]{};
+                    %\foreach \from/\to in {1/2,1/3,1/4,1/5,2/3,2/4,2/5,3/4}
+                    %\draw [-, shorten <=3pt, shorten >=3pt, >=stealth, line width=.7pt] (\from) to  (\to);
+                    %\draw [-, shorten <=3pt, shorten >=3pt, >=stealth, line width=.7pt] (5) to [bend left=50] (4);
+                    \node (g) at (150:5){$G$};
+                \end{scope}
+            \end{tikzpicture}
+        \end{center}\caption{Una gr\'afica $G$ donde podemos ver el camino $v_3v_1v_4v_2v_5v_1v_4v_2$, el paseo
+            $v_1v_3v_2v_1v_4$, la trayectoria $v_1v_4v_5v_2v_3$, el camino cerrado $v_1v_3v_2v_1v_5v_4v_1$ y el ciclo
+            $v_4v_5v_1v_2v_4$.}
+    \end{figure}
+
+
+\end{definicion}
+
+Dados $x,y \in V(G)$ una $xy$-\emph{trayectoria}\index{camino!trayectoria!xy-trayectoria} en $G$ es una trayectoria
+en $G$ con extremos $x,y$. La \textbf{\textit{distancia}}\index{longitud!distacia} entre $x$ y $y$ es la longitud de
+la $xy$-trayectoria mas corta en $G$ y se denota $d_G(x,y)$, cuando no haya lugar a confusiones lo escribiremos $d(x,
+y)$. El \textbf{\textit{di\'ametro}}\index{longitud!di\'ametro} de $G$ es la distancia m\'axima entre dos v\'ertices
+de \emph{G}.
+
+\begin{definicion}
+    Una gr\'afica $G$ es \textbf{\textit{conexa}}\index{gr\'afica!conexa} si para todo par de v\'ertices $x,y \in V
+    (G)$ existe un $xy$-\emph{camino} en $G$. Una componente conexa es una subgr\'afica conexa m\'axima por
+    contenci\'on.
+\end{definicion}
+
+El grado de un v\'ertice $v$, $d_G(v)$, en una gr\'afica $G$ es el n\'umero de aristas de $G$ que inciden en $v$.
+Denotamos al grado m\'inimo de $G$ como $\delta(G)$ y al grado m\'aximo de $G$, $\Delta(G)$.
+
+\begin{proposicion}
+    Sea $G$ una gr\'afica, todo $xy$-camino en $G$ contiene una $xy$-trayectoria en $G$.
+\end{proposicion}
+
+
+\begin{proof}
+    Por inducci\'on sobre la longitud del camino. Cuando la longitud del camino $W$, es uno tenemos una arista en $W$
+    . Cuando la longitud del camino $W$ es $n$ suponemos que hay una $xy$-trayectoria en W. Sea $\mathscr{C} =
+    (x=v_0, v_1, \dots, v_n,  v_{n+1}=y)$ un camino de longitd $n+1$; Consideremos $\mathscr{C'} = (x, v_1, \dots,
+    v_n)$, camino de longitud $n$ que por hip\'otesis inductiva ya contiene una $xv_n$-trayectoria, $P$. Ahora veamos
+    que si $P$ contiene a $y$ quiere decir que existe una $xy$-trayectoria en $P \subseteq \mathscr{C'} \subseteq
+    \mathscr{C}$. Si $P$ no contiene a $y$ entonces $P \cup v_ny \subseteq \mathscr{C}$ es una $xy$-trayectoria.
+\end{proof}
+
+\begin{proposicion}
+    Si  $G$ es una gr\'afica en la que existen dos $uv$-trayectorias distintas entonces la uni\'on de estas
+    trayectorias contiene un ciclo.
+\end{proposicion}
+
+
+\begin{proof}
+    Sean $P_1=(u=x_1,\dots,x_m=v)$, y $P_2=(u=y_1,\dots,y_n=v)$ dos $uv$-trayectorias distintas, consideremos a
+    $r=\min\{i\in\mathbb{N}\ |\ x_i\neq y_i\}$, dicho $r$ existe pues $P_1\neq P_2$, y tomemos a
+    $s=\min\{j\in\mathbb{N}\ |\ j>k, x_j\in P_2\}$, es decir $x_s=y_t$ para alg\'un $r<t\leq n$, observemos que $s$
+    existe puesto que $x_m=y_n=v$.
+
+    Por lo tanto $x_{r-1}P_1x_s$ y $y_{r-1}P_2y_t$  son dos trayectorias que se intersectan solamente en sus
+    extremos, entonces $x_sP_1x_{r-1}\cup y_{r-1}P_2y_t=(x_s,\dots,x_{r-1}=y_{r-1},\dots,y_t=x_s)$ es un ciclo.
+\end{proof}
+
+Para demostrar la pr\'oxima proposi\'on utilizaremos el siguiente lema.
+
+\begin{lema}
+    \label{lem1}
+    Todo camino cerrado de longitud impar contiene un ciclo de longitud impar.
+\end{lema}
+
+\begin{proof}
+    Demostraci\'on por inducci\'on sobre el n\'umero de v\'ertices que se repiten en el camino.
+    Sea $W = (v_1,v_2, \dots, v_k)$, un camino cerrado de longitud impar el cual no repite v\'ertices, entonces $W$
+    es un ciclo de longitud impar.
+    Supongamos que para todo camino cerrado de longitud impar con $k$ v\'ertices repetidos, donde $0\le k \le n$,
+    contiene un ciclo de longitud impar.
+    Sea $\mathscr{C}$ un camino cerrado de longitud impar con n v\'ertices repetidos,$\mathscr{C}= (x_1,x_2, ... ,
+    x_r)$.
+    Sin perdida de generalidad existe $j$ tal que $1<j<r$ con $x_1 = x_j$, lo que nos induce a dos caminos cerrados
+    $\mathscr{C}_1$ y $\mathscr{C}_2$,
+    $\mathscr{C}_1= (x_1, ..., x_j)$ y
+    $\mathscr{C}_2= (x_j, ..., x_r)$,
+    de estos dos caminos uno tiene longitud par y otro longitud impar, adem\'as de que en cada uno se repiten menos
+    de $n$ v\'ertices.
+    Entonces, sin perdida de generalidad supongamos que la longitud de $\mathscr{C}_1$ es impar, por hipotesis
+    inductiva sabemos que contiene un ciclo de longitud impar.
+\end{proof}
+
+
+\begin{proposicion}
+    Si $G$ es una gr\'afica con al menos dos v\'ertices, entonces es bipartita si y s\'olo si no contiene ciclos
+    impares.
+\end{proposicion}
+
+
+\begin{proof}
+    Sea $G$ una gr\'afica bipartita y $\mathscr{C} = (x_1,x_2, ..., x_r)$ un ciclo en $G$.
+    Sea $V_1$ y $V_2$ la bipartici\'on de $V(G)$, v\'ertices de $G$, vamos a suponer sin perdida de generalidad que
+    $x_1 \in V_1$ como $x_1x_2 \in E(G)$ por definici\'on de gr\'afica bipartita $x_2 \in V_2$, como $x_2x_3 \in E(G)
+    $ por definici\'on de gr\'afica bipartita $x_3 \in V_1$, en general $x_{2i-1} \in V_1$ y $x_{2i} \in V_2$. Veamos
+    que $x_rx_1 \in E(G)$ entonces $x_r \in V_2$ entonces $r$ es par y por tanto $\mathscr{C}$ es par, por tanto $G$
+    no contiene ciclos de longitud impar.
+
+    Sea $x \in V(G)$. Definamos a los conjuntos
+
+    $$N_1=\left\{ y \in V(G)\ \ \textnormal{tal que} \ \ d_G(x,y) \textnormal{ es par}\right\}$$
+    $$N_2=\left\{ y \in V(G)\ \ \textnormal{tal que} \ \ d_G(x,y) \textnormal{ es impar}\right\}$$
+
+
+    Observemos que $ N_1 \cup N_2  =  V(G)$,
+    $ N_1 \cap N_2  =  \varnothing$,
+    $N_1 \ne \varnothing \ne N_2$.
+    Supongamos que existe $uw \in E(G)$ con extremos en $N_1$, es decir, $u \in N_1$ y $w \in N_1$, entonces la
+    distancia de $x$ a $u$ y de $x$ a $w$ es par. Sea $\mathscr{C}_1$ una $xu$-trayectoria de longitud par y
+    $\mathscr{C}_2$ una $xw$-trayectoria de longitud par veamos entonces que $\mathscr{C}_1 \cup uw \cup
+    \mathscr{C}_2^{-1}$ es un camino cerrado de longitud impar, entonces, por el lema \ref{lem1} hay un ciclo de
+    longitud impar, por lo tanto hay una contradicci\'on, ya que $G$ no contiene ciclos impares. An\'alogo para el
+    caso en el que tomamos a $uw \in E(G)$ con extremos en $N_2$, ya que vamos a obtener dos caminos de longitud
+    impar que al sumarle la arista $uw$ nos da un camino cerrado de longitud impar por lo que entonces hay un ciclo
+    de longitud impar, implicando una contradicci\'on.
+\end{proof}
+
+\index{gr\'afica!ac\'iclica}
+\index{\'arbol}
+Una gr\'afica \textbf{ac\'iclica} es aquella que no contiene ciclos. Un \textbf{\'arbol} es una gr\'afica conexa
+ac\'iclica.
+
+
+\begin{figure}[ht]
+    \begin{center}
+        \begin{tikzpicture}
+        [every circle node/.style ={circle,draw,minimum size= 5pt,inner sep=0pt, outer sep=0pt},
+            every rectangle node/.style ={}]
+            ;
+            \begin{scope}[xshift=6cm, scale=0.7]
+
+                \node [circle] (1) at (72:2)[label=72:$v_1$]{};
+                \node [circle] (2) at (144:2)[label=144:$v_2$]{};
+                \node [circle] (3) at (216:2)[label=216:$v_3$]{};
+                \node [circle] (4) at (288:2)[label=288:$v_4$]{};
+                \node [circle] (5) at (360:2)[label=360:$v_5$]{};
+                %\foreach \from/\to in {2/1,2/3,2/4,2/5}
+                %\draw [-, shorten <=3pt, shorten >=3pt, >=stealth, line width=.7pt] (\from) to  (\to);
+                \node (g) at (150:5){$T$};
+            \end{scope}
+        \end{tikzpicture}
+    \end{center}\caption{\'Arbol $T$, gr\'afica conexa ac\'iclica.}
+\end{figure}
+
+\begin{teorema}
+    \label{ATU}
+    En un \'arbol $T$, cualesquiera dos v\'ertices estan conectados por una $xy$-trayectoria \'unica en $T$.
+\end{teorema}
+
+\begin{proof}
+    Por contradicci\'on.
+    Supongamos que existen $x,y \in V(T)$ y que existen $P_1$ y $P_2$ $xy$-trayectorias (distintas entre si) en $T$.
+    Sabemos que existe $e= v_1v_2$,  $e \in E(P_1)$ tal que $e \notin E(P_2)$, Podemos ver que $P_1 \cup P_2-e$ es
+    conexa, entonces existe una $v_1v_2-trayectoria$ $P_3$ y entonces $P_1 \cup P_2$ contiene un ciclo, $P_3 \cup
+    \left\{e\right\}$, pero $P_1 \cup P_2$ es subgr\'afica de $T$, y $T$ es ac\'iclica, por tanto es una
+    contradicci\'on.
+\end{proof}
+
+Si $T$ es un \'arbol una hoja de $T$ es un v\'ertice $v \in V(T)$ tal que $d(v) = 1$.
+
+\begin{teorema}
+    Todo \'arbol tiene al menos dos hojas.
+\end{teorema}
+
+\begin{proof}
+    Sea $T$ un \'arbol no trivial, entonces $d_T(v) \ge 1$ para todo $v \in V(T)$. Sea $P$ una $xy$-trayectoria de
+    longitud m\'axima en $T$, con extremos $x$ y $y$, $T$ no trivial afirmamos que $x$ y $y$ son hojas, pues de no
+    ser as\'i suponemos sin perdida de generalidad que $d_T(v) \ge 2$ entonces existe $w \in N_G(x)$ tal que no esta
+    en $P$, entonces $\left\{wx\right\} \cup P$ es una trayectoria de mayor longitud que $P$, o, existe $w \in N_T(x)
+    $ que est\'a en $P$ y entonces existe un ciclo, contradiciendo que $T$ es ac\'iclica.
+\end{proof}
+
+\begin{teorema}
+    Si $T$ es un \'arbol, entonces $|E(T)|=|V(T)|-1$.
+\end{teorema}
+
+\begin{proof}
+    Por inducci\'on sobre $|V(T)|$, el orden de $T$. Si $T$ tiene un s\' olo v\'ertice, el resultado se cumple
+    trivialmente.
+
+    Supongamos el resultado v\' alido para todo \'arbol con a lo m\' as $n$ v\'ertices. Sean $T$ un \'arbol con $n+1$
+    v\'ertices y $uv $ una arista de $T$. Por el Teorema \ref{ATU}, no existe una $uv$-trayectoria en $T$ y por lo
+    tanto $G - uv$ tiene dos componentes conexas $T_1$ y $T_2$. Como $T_1$ y $T_2$ son ac\' iclicas, resultan ser
+    \'arboles, y por hip\'otesis inductiva $$|E(T_i)| = |V(T_i)| -1, \ \ i \in \{ 1, 2 \}$$ pero claramente $$|E(T)|
+    = |E(T_1)| + |E(T_2)| + 1 = |V(T_1)|  + |V(T_2)| - 1 = |V(T)| - 1.$$
+\end{proof}
+
+
+\section{Hipercubos}
+
+Si $G$ y $H$ son gr\' aficas, el \textbf{producto cuadro}, $G \Box H$, se define como la gr\' afica que tiene por
+conjunto de v\' ertices al producto cartesiano $G \times H$ y donde $$(g,h)(g', h') \in A(G \Box H) \textnormal{ si y
+s\'olo si }\left\{ \begin{array}{c}
+                       g = g' \textnormal{ y } hh' \in E(H) \\ \textnormal{\' o } \\ gg' \in E(G) \textnormal{ y } h
+                       = h'
+\end{array} \right..$$
+
+A partir de la definici\' on de producto cuadro podemos hacer una observaci\'on muy \'util. Fijemos $g \in V(G)$ y
+llamemos $H_g$ a la subgr\' afica de $G \Box H$ inducida por el conjunto $\{ (g, h) \colon\ h \in V(H) \}$. Como la
+primera coordenada de todos los v\'ertices en $H_g$ es $g$, resulta claro que $H_g \cong H$; el isomorfismo est\'a
+dado por la funci\'on $\varphi (g,h) = h$. An\'alogamente, si fijamos $h \in V(H)$ y llamamos $G_h$ a la subgr\'
+afica de $G \Box H$ inducida por el conjunto $\{ (g, h) \colon\ g \in V(G) \}$, entonces $G_h \cong G$. As\' i, por
+cada v\' ertice de $H$, tenemos una copia isomorfa de $G$ y por cada v\' ertice de $G$ tenemos una copia isomorfa de
+$H$ en $G \Box H$.
+
+Esta observaci\' on puede generalizarse para el caso en el que tengamos el producto cuadro de un n\' umero finito de
+gr\' aficas. Denotaremos por $\prod_{i = 1}^n G_i$ al producto cuadro de una familia de gr\' aficas $\{ G_1, \dots,
+G_n \}$. Se sigue de la definici\'on de producto cuadro que $(u_1, \dots, u_n)(v_1, \dots, v_n) \in E \left( \prod_{i
+= 1}^n G_i \right)$ si y s\' olo si existe  $1 \le j \le n$ tal que $u_j v_j \in E(G_j)$  y  $u_i = v_i$ para cada $i
+\ne j$. A partir de esta observaci\'on, puede inferirse la siguiente proposici\'on.
+
+\begin{proposicion}
+    \label{prodcart}
+    Sean $\{ G_1, \dots, G_n \}$ una familia de gr\' aficas, $I \subseteq \{ 1, \dots, n \}$, $J = \{ 1, \dots, n \}
+    \setminus I$, y $\{ g_i \}_{i \in I}$ un conjunto de v\' ertices tales que $g_i \in V(G_i)$ para cada $i \in I$.
+    Si $X = \left\{ (v_1, \dots, v_n) \in V(\prod_{i=1}^n G_i) \colon\ v_i = g_i \textnormal{ si } i \in I, v_j \in
+    G_j \textnormal{ si } j \notin I \right\}$, entonces $$\left( \prod_{i=1}^n G_i \right) [ X ] \cong \prod_{j \in
+    J} G_j.$$   Como caso particular, si $I =  \{ i \}$, $$\left( \prod_{i=1}^n G_i \right) [ X ] \cong \prod_{j \ne
+    i} G_j.$$
+\end{proposicion}
+
+La demostraci\' on se omite por ser sencilla pero bastante t\' ecnica, basta observar que el isomorfismo est\' a dado
+por la proyecci\' on sobre el conjunto de coordenadas $J$.
+
+Consideremos las siguientes tres familias de gr\'aficas.
+
+\begin{definicion}
+    El \emph{hipercubo}\index{hipercubo} $n$-\emph{dimensional}, $H_n$ ($n \ge 1$), es la gr\'afica que tiene como
+    conjunto de v\'ertices al conjunto de todas las $n$-adas ordenadas de 0's y 1's, donde dos $n$-adas ordenadas son
+    adyacentes si y s\'olo si difieren en exactamente una coordenada.
+\end{definicion}
+
+\begin{definicion}
+    Definimos a la familia $R_n$ recursivamente:
+    \begin{itemize}
+        \item $R_1  =  K_2$,
+        \item $R_{n+1}  =  R_n \Box K_2$.
+    \end{itemize}
+\end{definicion}
+
+\begin{definicion}
+    Los v\'ertices de $S_n$ son los elementos de la potencia de $A$, donde $A=\left\{1,2,3, \dots, n\right\}$; $XY$
+    est\'a en las aristas de $S_n$ si y s\'olo si $|X \Delta Y|=1$.
+\end{definicion}
+
+En esta secci\'on demostraremos que estas tres familias de gr\'aficas son isomorfas, por lo tanto, tendremos tres
+definiciones distintas para trabajar con los hipercubos $d$-dimensionales.
+
+
+\begin{lema}
+    \label{lemcub}
+    En $S_n$ $|X \Delta Y|=1$ si y s\'olo si existe un \'unico $j \in \left\{1,2,3, \dots, n\right\}$ tal que $\chi_j
+    (X) \ne \chi_j(Y)$, donde $\chi_i: \mathcal{P}(A_n) \to \left\{0,1\right\}$ tal que  $\chi_i(Y) = \left\{
+    \begin{array}{cl}
+        1 & \textnormal{ si } i \in Y \\ 0 & \textnormal{ si } i \notin Y.
+    \end{array} \right.$
+\end{lema}
+
+\begin{proof}
+    Recordemos que $X \Delta Y=(X \setminus Y) \cup (Y \setminus X)$, entonces $|X \Delta Y|=1$ si y s\'olo si $|(X
+    \setminus Y) \cup (Y \setminus X)|=1$. Sabemos que $(X \setminus Y) \cap (Y \setminus X)= \varnothing$, por lo
+    que $|(X \setminus Y) \cup (Y \setminus X)|=|(X \setminus Y)| + |(Y \setminus X)|=1$.
+    Sin perdida de generalidad $|X \setminus Y|=1$ y $|Y \setminus X|=0$, entonces existe un \'unico $z \in X
+    \setminus Y$ y $Y\subseteq X$ por lo tanto $\chi_z(X)=1$, $\chi_z(Y)=0$ y $Y \subseteq X$, entonces $\chi_i(X)
+    =\chi_i(Y)$ para todo $i \ne z$.
+
+    Si existe un \'unico $1 \le k \le n$ tal que $\chi_k(X) \ne \chi_k(Y)$, supongamos sin perdida de generalidad que
+    $\chi_k(X)=1$ y que $\chi_k(Y)=0$ entonces $k \in X$ y $k \notin Y$ infiriendo que $k \in X \setminus Y$. Ahora
+    vemos que $Y \setminus X= \varnothing$, de lo contrario vemos que existe $k'$ tal que $k' \in Y$ y $k' \notin X$,
+    claramente $k' \ne k$ y $\chi_{k'}(X) \ne \chi_{k'}(Y)$ llegando a una contradicci\'on. Por tanto $Y \setminus
+    X=\varnothing$ y por la unicidad de $k$ se cumple que $|X \setminus Y|=1$. Entonces $|(X \setminus Y) \cup (Y
+    \setminus X)|=1$ y por lo tanto $|X \Delta Y|=1$.
+\end{proof}
+
+\begin{teorema}
+    Para cada entero $n \ge 1$ se cumple \[H_n \cong R_n \cong S_n.\]
+\end{teorema}
+
+
+\begin{proof}
+    Veamos primero que $S_n \cong H_n$.
+
+    Como $A=\left\{1,2,3, \dots, n\right\}$, para cada $i \in A$ definimos  $\chi_i: \mathcal{P}(A_n) \to \left\{0,
+    1\right\}$ tal que  $$\chi_i(Y) = \left\{ \begin{array}{cl}
+                                                  1 & \textnormal{ si } i \in Y \\ 0 & \textnormal{ si } i \notin Y.
+    \end{array} \right.$$
+
+    Sea $\varphi: \mathcal{P}(A_n) \to \left\{0,1\right\}^n$ tal que $$\varphi(Y)=(\chi_n(Y), \chi_{n-1}(Y), \dots,
+    \chi_1(Y)),$$ entonces $\varphi(Y) \in V(H_n)$ y resulta claro que $\varphi$ est\'a bien definida.
+
+    Para cada $i \in A$, definimos $\zeta_i: \left\{0,1\right\} \to \mathcal{P}(A_n) $ por  $$\zeta_i(x) = \left\{
+    \begin{array}{cl}
+        \left\{i\right\} & \textnormal{ si } x=1 \\ \varnothing & \textnormal{ si } x=0
+    \end{array} \right.;$$  si $y=(k_n, k_{n-1}, \dots, k_1)$ entonces podemos definir a  $\psi:\left\{0,
+    1\right\}^{n} \to \mathcal{P}(A_n)$ de la siguiente forma: $$\psi(y)=\zeta_n(k_n) \cup\zeta_{n-1}(k_{n-1}) \cup
+    \dots \cup \zeta_1(k_1) = \bigcup_{i=1}^n \zeta_i(k_i).$$
+
+    Es f\'acil observar que: $$\zeta_i (\chi_i(Y)) =  \left\{ \begin{array}{cl}
+                                                                  \left\{ i \right\} & \textnormal{ si } i \in Y    \\
+                                                                  \varnothing        & \textnormal{ si } i \notin Y
+    \end{array} \right.;$$  de esta manera,
+    \begin{align*}{rCl}
+        \psi \circ \varphi(Y) &= \psi(\chi_n(Y), \chi_{n-1}(Y), \dots, \chi_1(Y)) \\
+        &= \zeta_n (\chi_n(Y)) \cup \zeta_{n-1}(\chi_{n-1}(Y)) \cup \dots \cup \zeta_1(\chi_1(Y)) \\
+        &= Y,
+    \end{align*}
+    por lo tanto, $\psi \circ \varphi = 1_{\mathcal{P}(A_n)}$.
+
+    Por otro lado, si $y \in \{ 0, 1 \}^n$,  entonces $k_j=1$ si y s\'olo si $j \in \bigcup_{i=1}^n \zeta_i(k_i)$ si
+    y s\'olo si          $\chi_j(\bigcup_{i=1}^n \zeta_i(k_i))=1$. Adem\'as, $k_j=0$ si y s\'olo si $j \notin
+    \bigcup_{i=1}^n \zeta_i (k_i)$ si y s\'olo si $\chi_j(\bigcup_{i=1}^n \zeta_i(k_i))=0$. Por lo tanto,
+    \begin{align*}{rCl}
+        \varphi \circ \psi(y) &= \varphi(\zeta_n (k_n) \cup \zeta_{n-1}(k_{n-1}) \cup \dots \cup \zeta_1(k_1)) \\
+        &= (\chi_n (\bigcup_{i=1}^n \zeta_i(k_n)), \chi_{n-1}(\bigcup_{i=1}^n \zeta_i(k_{n-1})), \dots,
+        \chi_1(\bigcup_{i=1}^n   \zeta_i(k_1))) \\
+        &= (k_n, k_{n-1}, \dots, k_1).
+    \end{align*}
+    De esta manera podemos concluir que $\varphi \circ \psi = 1_{\{ 0, 1 \}^n}$. As\'i, obtenemos que $\varphi$ es
+    una funci\'on biyectiva. Para demostrar que $\varphi$ es un isomorfismo, observemos que $XY \in E(S_n)$ si y
+    s\'olo si $|X \Delta Y|=1$. Por el Lema \ref{lemcub}, \'esto sucede si y s\'olo si existe un \'unico $j \in
+    \left\{1,2,3, \dots, n\right\}$ tal que $\chi_j(X) \ne \chi_j(Y)$ si y s\'olo si $\varphi(X) \varphi(Y) \in E
+    (H_n)$; por lo tanto $\varphi$ es un isomorfismo entre $H_n$ y $S_n$.
+
+    Veamos ahora que $R_n \cong H_n$. Sabemos que $R_1=K_2$, donde $V(R_1)=\left\{u,v\right\}$ y $E(R_1)
+    =\left\{uv\right\}$. Sabemos tambi\' en que $V(H_1)=\left\{(0),(1)\right\}$ y $E(H_1)=\left\{(0)(1)\right\}$.
+    Podemos definir a $\varphi_1:V(R_1) \to V(H_1)$ por  $$\varphi_1(u)=0, \varphi_1(v)=1.$$   Resulta claro que
+    $\varphi_1$ es una funci\' on biyectiva con inversa $\varphi_1^{-1}:V(H_1) \to V(R_1)$ dada por $\varphi_1^{-1}
+    (0)=u, \varphi_1^{-1}(1)=v$. M\' as a\' un, como $E(R_1) = \{ uv \}$ y $E(H_1) = \{ (0)(1) \}$, la biyecci\'on
+    $\varphi$ es un isomorfismo.
+
+    Entonces, para cada entero $n \ge 2$ podemos definir a $\varphi_n:V(R_n) \to V(H_n)$ como:   $$\varphi_n(x_0,x_1,
+    ..., x_n)=(\varphi_1(x_0),\varphi_1(x_1), ..., \varphi_1(x_n)).$$ Resulta claro que $\varphi_n$ est\'a bien
+    definida y que tiene por inversa a la funci\'on $\varphi_n^{-1}:V(H_n) \to V(R_n)$ dada por:
+    $$\varphi_n^{-1}(y_0,y_1, ..., y_n)=(\varphi_1^{-1}(y_0),\varphi_1^{-1}(y_1), \dots , \varphi_1^{-1}(y_n)).$$
+    Por lo tanto $\varphi_n$ es una funci\'on biyectiva, y basta entonces verificar que preserva las aristas.
+    Demostraremos por inducci\'on sobre $n$ que $xy \in E(R_n)$ si y s\'olo si $\varphi_1(x)\varphi_1(y) \in E(H_n)$.
+
+    Para $n=1$ ya lo hemos verificado. Ahora supongamos que $\varphi_{n-1}$ es un isomorfismo entre $R_{n-1}$ y $
+    H_{n-1}$ y sean $x = (x_0,x_1, \dots, x_n)$ y $z = (z_0, z_1, \dots, z_n)$. Sabemos que $R_n=R_{n-1} \Box K_2$
+    por lo tanto $V(R_n)=X \sqcup Y$, donde $$X_1=\left\{(x_0,x_1, ..., x_{n-1}, u)\big| x_i \in \left\{u,v\right\},
+    1 \le i \le n-1 \right\}$$ $$Y_1=\left\{(x_0,x_1, ..., x_{n-1}, v)\big| x_i \in \left\{u,v\right\}, 1 \le i \le
+    n-1 \right\}.$$   Claramente $X_1 \cap Y_1 = \varnothing$; adem\'as la Proposici\'on \ref{prodcart} garantiza que
+    $R_n[X_1] \cong R_{n-1}$ y $R_n[Y_1] \cong R_{n-1}$.
+
+    An\'alogamente puede observarse que si:
+    $$X_2=\left\{(y_0, y_1, \dots, y_{n-1},0) \big| y_i \in \left\{0,1\right\}, 1 \le i \le n-1\right\}$$
+    $$Y_2=\left\{(y_0, y_1, \dots, y_{n-1},1) \big| y_i \in \left\{0,1\right\}, 1 \le i \le n-1\right\},$$ entonces
+    $X_2 \cap Y_2 = \varnothing$ y $X_2 \cup Y_2= V(H_n)$. Adem\'as, como todos los v\' ertices en $X_2$ tienen la
+    misma coordenada final, no es dif\'icil obtener que $H_n [X_2] \cong H_{n-1}$ y, an\' alogamente, $H_n [Y_2]
+    \cong H_{n-1}$.
+
+    Por las definiciones de $\varphi_{n-1}$ y $\varphi_n$, resulta claro que $$\varphi_n(x_0,x_1, \dots, x_n) =
+    (\varphi_{n-1}(x_0,x_1, \dots, x_{n-1}), \varphi_1(x_n)).$$   Podemos considerar dos casos:
+
+    Si $x_n = z_n$, podemos suponer sin p\'erdida de generalidad que $x_n = z_n = u$. Entonces,  $z,x \in X_1$ y por
+    lo tanto $xz \in E(R_n [X_1] )$. Si definimos a $\pi: R_n [X_1] \to R_{n-1}$ por $\pi ( (x_0, \dots, x_{n-1}, u)
+    ) = (x_0, \dots, x_{n-1})$ y a $\eta: H_{n-1} \to H [X_2]$ por $\eta ( (w_0, \dots, w_{n-1}) )= (w_0, \dots,
+    w_{n-1}, 0)$, resulta claro que \'estos son los isomorfismos antes mencionados, por lo tanto, al definir $\psi =
+    \eta \circ \varphi_{n-1} \circ \pi$, y recordando que la composici\'on de isomorfismos es un isomorfismo, tenemos
+    que $\psi$ es un isomorfismo. Pero $\psi (x_0, \dots, x_{n-1}, u) = (\varphi_1 (x_0), \dots, \varphi_1 (x_{n-1}),
+    0) = \varphi_n (x_0, \dots, x_n)$. As\'i, $\psi = \varphi_n \big|_{R_n [X_1]}$, por lo que el diagrama de la
+    Figura \ref{diag} es conmutativo y $\varphi_n \big|_{R_n [X_1]} : R_n [X_1] \to H[X_2]$ es un isormorfismo. En
+    particular, $xz \in E(R_n [X_1])$ si y s\' olo si $\varphi_n (x) \varphi_n (z) \in E(H_n [X_2])$ y por lo tanto
+    $xz \in E(R_n)$ si y s\'olo si $\varphi(x) \varphi (z) \in E(H_n)$.
+
+
+    \begin{figure}[H]
+        \begin{center}
+            \begin{tikzpicture}
+%[every circle node/.style ={circle,draw,minimum size= 5pt,inner sep=0pt, outer sep=0pt},
+%every rectangle node/.style ={}];
+%\begin{scope}[xshift=6cm, scale=0.7]
+
+                \node (1) at (0,0){$R[X_1]$};
+                \node (2) at (0,2){$R_{n-1}$};
+                \node (3) at (4,2){$H_{n-1}$};
+                \node (4) at (4,0){$H[X_2]$};
+
+                %\draw [->, shorten <=1pt, shorten >=1pt, >=stealth, line width=.7pt] (1) to node[left]{$\pi$} (2);
+                %\draw [->, shorten <=1pt, shorten >=1pt, >=stealth, line width=.7pt] (2) to
+                %node[above]{$\varphi_{n-1}$} (3);
+                %\draw [->, shorten <=1pt, shorten >=1pt, >=stealth, line width=.7pt] (3) to node[right]{$\eta$} (4);
+                %\draw [->, shorten <=1pt, shorten >=1pt, >=stealth, line width=.7pt] (1) to node[below]{$\varphi_n
+                %\big|_{R_n [X_1]}$} (4);
+%\end{scope}
+            \end{tikzpicture}
+        \end{center} \caption{$\varphi_n \big|_{R_n [X_1]} = \psi = \eta \circ \varphi_{n-1} \circ \pi$} \label{diag}
+    \end{figure}
+
+    Ahora supongamos $x_n \ne z_n$. Inferimos que $xz \in E(R_n)$ si y s\'olo si $x_i = z_i$, $1 \le i \le {n-1}$, si
+    y s\'olo si, sin perdida de generalidad $x=(x_0, x_1,\dots, x_{n-1}, u)$ y $z=(x_0, x_1,\dots, x_{n-1}, v)$ si y
+    s\'olo si $\varphi(x)=(\varphi_1(x_0), \varphi_1(x_1),\dots, \varphi_1(x_{n-1}),0)$ y $\varphi(z)=(\varphi_1(x_0)
+    , \varphi_1(x_1),\dots, \varphi_1(x_{n-1}),1)$ si y s\'olo si $\varphi(x)\varphi(z) \in E(H_n)$ y $\varphi_1(x_n)
+    \ne \varphi_1(z_n)$. Por lo tanto $R_n \cong H_n$ y por lo tanto $S_n \cong H_n \cong R_n$.
+\end{proof}
+
+En el hipercubo $d$-dimensional $H_d$ con $n=2^d$ v\'ertices, para cada v\'ertice $x$, hay una etiqueta distinta
+asociada con cada una de las aristas incidentes; la etiqueta entre el v\'ertice $x$ y el v\'ertice $z$, es la
+posici\'on de la entrada en la que los v\'ertices $x$ y $z$ difieren, llamada dimensi\'on.
+Sea $G=H_d=(V,E)$ un hipercubo con $n=|V|$, orden de $G$. Sean $E(x)$ las aristas incidentes a $x \in V$. Sea
+$\lambda_x: E(x) \to \left\{1, 2, ..., d\right\}$ una funci\'on inyectiva que define la etiqueta de la arista para el
+v\'ertice $x$; es decir, $\lambda_x(x,y)$ indica la entrada en la que $x$ difiere de $y$.
+
+
+\begin{figure}[ht]
+    \begin{center}
+        \begin{tikzpicture}
+        [every circle node/.style ={circle,draw,minimum size= 5pt,inner sep=0pt, outer sep=0pt},
+            every rectangle node/.style ={}]
+            ;
+
+            \begin{scope}[xshift=6cm, scale=0.5]
+                \node [circle] (1) at (45:2)[label=45:$\text{(1,1)}$]{};
+                \node [circle] (2) at (135:2)[label=135:$\text{(0,1)}$]{};
+                \node [circle] (3) at (225:2)[label=225:$\text{(0,0)}$]{};
+                \node [circle] (4) at (315:2)[label=315:$\text{(1,1)}$]{};
+                %\foreach \from/\to in {1/2,2/3,3/4,4/1}
+                %\draw [-, shorten <=3pt, shorten >=3pt, >=stealth, line width=.7pt] (\from) to  (\to);
+                \node (g) at (150:5){$H_2$};
+            \end{scope}
+
+        \end{tikzpicture}
+    \end{center}\caption{ Hipercubo 2-dimensional } \label{etiquetas}
+\end{figure}
+
+
+
