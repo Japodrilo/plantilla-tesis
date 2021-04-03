@@ -1,3 +1,145 @@
 \chapter{Introducci\'on}
+\label{sec:intro}
+
+Este documento tiene algunos ejemplos m\'inimos de caracter\'isticas que se
+suelen utilizar en tesis de las licenciaturas en matem\'aticas y ciencias de la
+computaci\'on, en particular en el \'area de teor\'ia de gr\'aficas (el \'area
+de trabajo del autor).
+
+Se exhorta al usuario a leer la
+\href{https://tobi.oetiker.ch/lshort/lshort.pdf}{Not So Short Inroduction to
+\LaTeX}.   Aunque realmente no es un documento muy largo, para quienes nunca han
+usado \LaTeX{} es posible que las partes t\'ecnicas no tengan sentido.   En este
+caso, es recomendable leer los dos primeros cap\'itulos, y regresar al resto del
+documento para hacer consultas, o cuando se tenga algo de experiencia y se
+desee mejorar como usuario.   En particular, antes de intentar cambiar el tipo
+de letra, o el tama\~no de los m\'argenes, considere la siguiente observaci\'on
+que aparece en el documento antes mencionado:
+\begin{quote}
+  Typographical design  is  a  craft.   Unskilled  authors  often  commit
+  seriousformatting errors  by  assuming  that  book  design  is  mostly  a
+  question of aesthetics---``If a document looks good artistically, it is well
+  designed.'' But as a document has to be read and not hung up in a picture
+  gallery, the readability and understandability is of much greater importance
+  than the beautiful look of it.
+\end{quote}
+
+Idealmente, el lector obtuvo esta plantilla mediante
+\href{https://github.com/Japodrilo/template-tesis}{este repositorio}. De no ser
+as\'i, se le invita a visitarlo, y a usar las bondades del control de versiones
+que el uso de \href{https://git-scm.com/}{Git} otorga (en particular cuando se
+utiliza en conjunto con alguna plataforma para albergar sus repositorios
+remotamente\footnote{Los alumnos de la Facultad de Ciencias de la UNAM tienen
+acceso al \href{https://education.github.com/pack}{GitHub Student Developer
+Pack} con su cuenta \ttt{@ciencias.unam.mx}.}).
 
 
+\section{C\'omo usar esta plantilla}
+\label{sec:howto}
+
+Esta plantilla se dise\~n\'o como una ayuda para aquellos usuarios que ya
+est\'an familiarizados con \LaTeX, pero nunca han desarrollado un proyecto
+``grande'' (m\'as all\'a de tareas o reportes finales de proyectos).   Siguiendo
+las instrucciones encontradas en el archivo \ttt{README.md}, lo m\'as probable
+es que hayan creado un nuevo repositorio a partir del ``template repository''
+que contiene este proyecto.   En primer lugar, verifique que el proyecto compile
+adecuadamente; el proyecto deber\'ia de compilar sin errores ni advertencias. Es
+posible que la primera vez que se compila, su manejador de paquetes actualice
+varios de \'estos, lo que puede llevar un tiempo.   En caso de tener errores, es
+posible que \'estos se deban a la falta de algunos paquetes, y a que su
+manejador de paquetes no los instala autom\'aticamente;  instalar los paquetes
+faltantes manualmente deber\'ia de resolver todos los problemas.
+
+La estructura de este proyecto es sencilla.   Hay un archivo central,
+\ttt{tesis.tex}, que contiene el pre\'ambulo del documento, y donde se incluyen
+todos los paquetes y definiciones necesarias.   El c\'odigo esta comentado,
+explicando de forma m\'inima para qu\'e sirve cada comando; se recomienda que al
+modificarlo se mantenga un estilo semejante para no causarle problemas
+innecesarios a su yo del futuro.   Todos los contenidos se encuentran en otros
+archivos dentro del mismo directorio, que son llamados desde \ttt{tesis.tex}
+mediante el comando \ttt{\textbackslash{include}}.   De esta forma se
+incluyen la car\'atula, la hoja de datos, los cap\'itulos que forman parte de la
+tesis, la bibliograf\'ia, etc.   Por otro lado, \LaTeX genera (casi)
+autom\'aticamente el \'indice y el \'indice alfab\'etico, pero hay que agregar
+comandos para su inclusi\'on.  La mayor\'ia de los usuarios s\'olo necesitan
+preocuparse por modificar algunos de los archivos existentes, e incluir otros.
+Sin embargo, es \'util que est\'en familiarizados con los conceptos de
+\ttt{frontmatter}, \ttt{mainmatter}, \ttt{appendix} y \ttt{backmatter} (puede
+referirse a \cite{oetiker2007} para revisarlos).
+
+A continuaci\'on, se recomienda revisar el documento generado (este documento) e
+identificar cu\'ales son las caracter\'isticas que se desean utilizar (dibujos,
+algoritmos, tablas, etc.).   Tras determinar cu\'ales son los paquetes
+relevantes para las caracter\'isticas deseadas, comentar (o borrar) todos
+aquellos que no ser\'an utilizados en el archivo \ttt{tesis.tex}.   Si se est\'a
+usando \ttt{git}, se recomienda leer \cref{sec:git}.   De otro modo, puede
+empezar a reemplazar los contenidos de la plantilla con su propio trabajo.
+
+\section[Uso recomendado con git]{Flujo de trabajo recomendado con \ttt{git}}
+\label{sec:git}
+
+Si el lector no est\'a usando \ttt{git}\index{git}, puede ignorar esta
+secci\'on.   De otro modo, se propone un flujo de trabajo con el que el tesista
+puede autogestionar el desarrollo de su tesis, o \'este puede ser supervisado
+por su director de tesis mediante el uso de \ttt{GitHub}\index{git!GitHub}.
+
+Este repositorio cuenta con tres ramas al momento de ser clonado: \ttt{master},
+\ttt{original} y \ttt{prueba}.   Idealmente, \ttt{master} debe contener su
+trabajo final, una vez que ha sido revisado por su director de tesis, por lo que
+nunca deber\'ia de trabajar directamente sobre esta rama.   Por este motivo,
+antes de realizar cambios y experimentos en los archivos del proyecto, se
+recomienda cambiar a la rama \ttt{prueba}.   Tras realizar algunos experimentos,
+eliminar los contenidos que no necesita, y agregar sus datos a la car\'atula y
+hoja de datos, posiblemente se sienta listo para empezar a incluir su trabajo en
+el proyecto.   En este momento se recomienda agregar los cambios realizados al
+repositorio, realizar un \ttt{commit} con los mismos, y realizar un \ttt{merge}
+a \ttt{master}.   A partir de ahora, \ttt{master} estar\'a lista para empezar a
+trabajar.
+
+En este momento, es posible crear
+\href{https://guides.github.com/features/issues/}{\ttt{Issues}} en su
+repositorio para tener metas de trabajo.   Como muy posiblemente s\'olo una
+persona est\'e trabajando en el proyecto (el tesista), es posible que s\'olo
+se trabaje en un \ttt{issue} a la vez, sin embargo, es una buena pr\'actica
+tener una rama para cada \ttt{issue} (lo que resultar\'a a\'un m\'as \'util si
+se trabaja en m\'as de una caracter\'istica nueva a la vez).   Idealmente, toda
+rama nueva saldr\'a de \ttt{master}, y estar\'a dedicada a resolver un \'unico
+\ttt{issue}.   Un ciclo de trabajo\index{ciclo de trabajo} usual puede verse
+de la siguiente forma.
+
+\begin{enumerate}
+  \item Determinar una caracter\'istica nueva que se desea agregar al
+    trabajo (e.g., la demostraci\'on de un teorema central de la tesis).
+
+  \item Crear un \ttt{issue} describiendo qu\'e es lo que espera agregar
+    al trabajo (e.g., qu\'e conceptos se necesitan agregar, proveer una
+    referencia del teorema, indicar si es necesario incluir resultados
+    preliminares o ejemplos).
+
+  \item Asignar el \ttt{issue} al tesista, y opcionalmente agregar una fecha
+    l\'imite.   (En caso de que el director de tesis est\'e supervisando el
+    trabajo mediante \ttt{git}, asignarlo como revisor del \ttt{issue}.)
+
+  \item Crear una nueva rama (a partir de \ttt{master}) para resolver el
+    \ttt{issue}.
+
+  \item Una vez resuelto el \ttt{issue}, hacer un \ttt{commit} con los cambios,
+    un \ttt{push} al repositorio, y abrir un \ttt{pull request} que ser\'a
+    cerrado una vez que el director de tesis haya revisado el nuevo trabajo.
+    (En caso de que el director de tesis est\'e supervisando el trabajo mediante
+    \ttt{git}, deber\'a de ser agregado como revisor del \ttt{pull request},
+    y \'este ser\'a mezclado hasta tener su aprobaci\'on.)
+
+  \item Tras aceptar el \ttt{pull request}, cerrar el \ttt{issue} y borrar la
+    rama correspondientes (esto puede hacerse autom\'aticamente al aceptar el
+    \ttt{pull request}).
+\end{enumerate}
+
+Un ciclo de trabajo tomar\'a tipicamente una semana, por lo que las metas a ser
+cubiertas por cada \ttt{issue} deber\'an planearse con cuidado.
+
+Se recomienda no modificar la rama \ttt{original}.   Si en cualquier momento se
+necesitara tener acceso a este documento (quiz\'a el usuario requiere revisar un
+ejemplo, o recuperar alg\'un paquete que borr\'o previamente), basta con
+cambiarse a la rama \ttt{original}, donde siempre habr\'a una copia local del
+mismo.
