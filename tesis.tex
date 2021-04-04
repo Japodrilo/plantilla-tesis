@@ -1,7 +1,15 @@
-\documentclass[12pt,twoside]{book}
+% !TEX TS-program = latexmk
+
+\documentclass[12pt,twoside,spanish]{book}
+
+% Verificacion de sintaxis sin producir salida:
+% descomentar la segunda linea para verificar
+% sintaxis sin producir salida.
+\usepackage{syntonly}
+% \syntaxonly
 
 % Palabras clave en distintos idiomas
-\usepackage[activeacute,spanish]{babel}
+\usepackage[activeacute]{babel}
 
 % Patrones para division en silabas
 \hyphenation{par-ti-cu-lar}
@@ -19,33 +27,69 @@
 \usepackage{amssymb}
 \usepackage{mathrsfs}
 
+% Colores
+\usepackage[table]{xcolor}
+
+\definecolor{verdeOscuro}{rgb}{0,0.6,0}
+\definecolor{verdeAzulado}{RGB}{3,168,108}
+\definecolor{gris}{rgb}{0.5,0.5,0.5}
+\definecolor{malva}{rgb}{0.58,0,0.82}
+\definecolor{grisClaro}{rgb}{0.92,0.92,0.92}
+
+% Vinculos
+\usepackage{hyperref}
+\hypersetup{
+  colorlinks,
+  urlcolor={malva}
+}
+
+% Codigo
+\usepackage{listings}
+\lstset{
+  language=[LaTeX]TeX,
+  aboveskip=3mm,
+  belowskip=3mm,
+  showstringspaces=false,
+  columns=flexible,
+  basicstyle={\small\ttfamily},
+  numbers=none,
+  extendedchars=true,
+  numberstyle=\tiny\color{gris},
+  keywordstyle=\color{blue},
+  commentstyle=\color{verdeOscuro},
+  stringstyle=\color{malva},
+  breaklines=true,
+  breakatwhitespace=true,
+  tabsize=3,
+  backgroundcolor=\color{grisClaro},
+  moretexcs={color},
+}
+
+
 % Algoritmos
 \usepackage[ruled,lined,linesnumbered,commentsnumbered]{algorithm2e}
 
 %\usepackage[all]{xy}
 
-% Ambientes de teorema y demostracion
-\usepackage{amsthm}
-
 % Generacion de dibujos con TeX
 \usepackage{tikz}
-\usetikzlibrary{arrows,shapes,matrix,decorations.pathmorphing}
+\usetikzlibrary{arrows,shapes,matrix,decorations,calc,positioning}
+\tikzstyle{arc}   =[->,shorten <=3pt, shorten >=3pt,
+                   >=stealth, line width=1.1pt]
+\tikzstyle{edge}  =[shorten <=2pt, shorten >=2pt,
+                    >=stealth, line width=1.1pt]
+\tikzstyle{myloop}=[style={},shorten <=1pt, shorten >=1pt,
+                    >=stealth, line width=1.1pt, loop]
+\tikzstyle{vertex}=[circle, draw, minimum size=6pt,
+                    line width=0.75pt, inner sep=0pt,
+                    outer sep=0pt]
+
 
 % Ajuste de parametros en la pagina
 \usepackage{geometry}
 
 % Ubicacion precisa de floats
 \usepackage{float}
-
-% Definiciones de teoremas
-\newtheorem{teorema}{Teorema}[section]
-\newtheorem{lema}[teorema]{Lema}
-\newtheorem{proposicion}[teorema]{Proposici\'on}
-\newtheorem{corolario}[teorema]{Corolario}
-
-% Definiciones de ambientes adicionales
-\theoremstyle{definition}
-\newtheorem{definicion}[teorema]{Definici\'on}
 
 % Manejo de encabezados
 \usepackage{fancyhdr}
@@ -60,7 +104,7 @@
 \fancyhead[RE]{\textsc{\bfseries\nouppercase\leftmark}}
 \renewcommand{\headrulewidth}{0.5pt}
 \renewcommand{\footrulewidth}{0pt}
-\addtolength{\headheight}{0.5pt}
+\addtolength{\headheight}{3pt}
 \fancypagestyle{plain}{
   \fancyhead{}
   \renewcommand{\headrulewidth}{0pt}
@@ -70,6 +114,34 @@
 \newcommand{\blackqed}{\hfill$\blacksquare$}
 \newcommand{\whiteqed}{\hfill$\square$}
 \newcounter{proofcount}
+
+% Generacion de tabla de contenidos
+\usepackage{makeidx}
+\makeindex
+
+% Ambientes de teorema y demostracion
+\usepackage{amsthm}
+
+% Referencias con nombres automaticos
+\usepackage{cleveref}
+
+% Definiciones de nuevos ambientes
+\newtheorem{teorema}{Teorema}[section]
+\newtheorem{lema}[teorema]{Lema}
+\newtheorem{proposicion}[teorema]{Proposici\'on}
+\newtheorem{corolario}[teorema]{Corolario}
+
+\theoremstyle{definition}
+\newtheorem{definicion}[teorema]{Definici\'on}
+
+% Nombres para cleveref
+\crefname{teorema}{el Teorema}{los Teoremas}
+\crefname{lema}{el Lema}{los Lemas}
+\crefname{proposicion}{la Proposici\'on}{las Proposiciones}
+\crefname{corolario}{el Corolario}{los Corolarios}
+\crefname{algorithm}{el Algoritmo}{los Algoritmos}
+\crefname{section}{la Secci\'on}{las Secciones}
+\crefname{figure}{la Figura}{las Figuras}
 
 % Redefinicion para que las demostraciones terminen con cuadrito negro
 \renewenvironment{proof}[1][\proofname.]{\par
@@ -86,11 +158,19 @@
 \popQED\endtrivlist
 }
 
-% Para generar la tabla de contenidos
-\usepackage{makeidx}
+% Macros
+% Abreviatura para fuentes true type
+\newcommand{\ttt}[1]{%
+\texttt{#1}%
+}
 
-% Generacion de tabla de contenidos
-\makeindex
+\newcommand{\indice}[1]{%
+\textbf{#1}\index{#1}%
+}
+
+\newcommand{\indiceSub}[2]{%
+\textbf{#2}\index{#1!#2}%
+}
 
 \begin{document}
 
@@ -108,13 +188,9 @@
 \include{cap1}
 
 
-%\appendix
-%\include{Ap1}
-
 \backmatter
 
 \printindex
-
 \include{biblio}
 
 \end{document}
