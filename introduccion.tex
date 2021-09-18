@@ -52,14 +52,14 @@ faltantes manualmente deber\'ia de resolver todos los problemas.
 
 La estructura de este proyecto es sencilla.   Hay un archivo central,
 \ttt{tesis.tex}, que contiene el pre\'ambulo del documento, y donde se incluyen
-todos los paquetes y definiciones necesarias.   El c\'odigo esta comentado,
+todos los paquetes y definiciones necesarias.   El c\'odigo est\'a comentado,
 explicando de forma m\'inima para qu\'e sirve cada comando; se recomienda que al
 modificarlo se mantenga un estilo semejante para no causarle problemas
 innecesarios a su yo del futuro.   Todos los contenidos se encuentran en otros
 archivos dentro del mismo directorio, que son llamados desde \ttt{tesis.tex}
 mediante el comando \ttt{\textbackslash{include}}.   De esta forma se
 incluyen la car\'atula, la hoja de datos, los cap\'itulos que forman parte de la
-tesis, la bibliograf\'ia, etc.   Por otro lado, \LaTeX genera (casi)
+tesis, la bibliograf\'ia, etc.   Por otro lado, \LaTeX~ genera (casi)
 autom\'aticamente el \'indice y el \'indice alfab\'etico, pero hay que agregar
 comandos para su inclusi\'on.  La mayor\'ia de los usuarios s\'olo necesitan
 preocuparse por modificar algunos de los archivos existentes, e incluir otros.
@@ -83,17 +83,18 @@ secci\'on.   De otro modo, se propone un flujo de trabajo con el que el tesista
 puede autogestionar el desarrollo de su tesis, o \'este puede ser supervisado
 por su director de tesis mediante el uso de \ttt{GitHub}\index{git!GitHub}.
 
-Este repositorio cuenta con tres ramas al momento de ser clonado: \ttt{master},
-\ttt{original} y \ttt{prueba}.   Idealmente, \ttt{master} debe contener su
-trabajo final, una vez que ha sido revisado por su director de tesis, por lo que
-nunca deber\'ia de trabajar directamente sobre esta rama.   Por este motivo,
-antes de realizar cambios y experimentos en los archivos del proyecto, se
-recomienda cambiar a la rama \ttt{prueba}.   Tras realizar algunos experimentos,
-eliminar los contenidos que no necesita, y agregar sus datos a la car\'atula y
-hoja de datos, posiblemente se sienta listo para empezar a incluir su trabajo en
-el proyecto.   En este momento se recomienda agregar los cambios realizados al
-repositorio, realizar un \ttt{commit} con los mismos, y realizar un \ttt{merge}
-a \ttt{master}.   A partir de ahora, \ttt{master} estar\'a lista para empezar a
+Este repositorio cuenta con dos ramas al momento de ser clonado: \ttt{master} y
+\ttt{original}.   Idealmente, \ttt{master} debe contener su trabajo final, una
+vez que ha sido revisado por su director de tesis, por lo que nunca deber\'ia de
+trabajar directamente sobre esta rama.   Por este motivo, antes de realizar
+cambios y experimentos en los archivos del proyecto, se recomienda crear una
+nueva rama, llamada por ejemplo \ttt{prueba}, usando el comando \ttt{git
+checkout -b prueba}.   Tras realizar algunos experimentos, eliminar los
+contenidos que no necesita, y agregar sus datos a la car\'atula y hoja de datos,
+posiblemente se sienta listo para empezar a incluir su trabajo en el proyecto.
+En este momento se recomienda agregar los cambios realizados al repositorio,
+realizar un \ttt{commit} con los mismos, y realizar un \ttt{merge} a
+\ttt{master}.   A partir de ahora, \ttt{master} estar\'a lista para empezar a
 trabajar.
 
 En este momento, es posible crear
@@ -123,12 +124,12 @@ de la siguiente forma.
   \item Crear una nueva rama (a partir de \ttt{master}) para resolver el
     \ttt{issue}.
 
-  \item Una vez resuelto el \ttt{issue}, hacer un \ttt{commit} con los cambios,
-    un \ttt{push} al repositorio, y abrir un \ttt{pull request} que ser\'a
-    cerrado una vez que el director de tesis haya revisado el nuevo trabajo.
-    (En caso de que el director de tesis est\'e supervisando el trabajo mediante
-    \ttt{git}, deber\'a de ser agregado como revisor del \ttt{pull request},
-    y \'este ser\'a mezclado hasta tener su aprobaci\'on.)
+  \item Una vez resuelto el \ttt{issue}, hacer un \ttt{commit} (o varios) con
+    los cambios, un \ttt{push} al repositorio, y abrir un \ttt{pull request}
+    que ser\'a cerrado una vez que el director de tesis haya revisado el nuevo
+    trabajo. (En caso de que el director de tesis est\'e supervisando el
+    trabajo mediante \ttt{git}, deber\'a de ser agregado como revisor del
+    \ttt{pull request}, y \'este ser\'a mezclado hasta tener su aprobaci\'on.)
 
   \item Tras aceptar el \ttt{pull request}, cerrar el \ttt{issue} y borrar la
     rama correspondientes (esto puede hacerse autom\'aticamente al aceptar el
@@ -142,4 +143,9 @@ Se recomienda no modificar la rama \ttt{original}.   Si en cualquier momento se
 necesitara tener acceso a este documento (quiz\'a el usuario requiere revisar un
 ejemplo, o recuperar alg\'un paquete que borr\'o previamente), basta con
 cambiarse a la rama \ttt{original}, donde siempre habr\'a una copia local del
-mismo.
+mismo.   Es importante se\~nalar que, por el momento, \ttt{GitHub} crea
+historias distintas para todas las ramas en un repositorio plantilla, por lo que
+no es posible mezclar f\'acilmente commits entre \ttt{original} y \ttt{master}.
+Esperamos que en un futuro \ttt{GitHub} permita empezar todas las ramas en un
+repositorio plantilla con el mismo commit, en cuyo caso se integrar\'a una
+tercera rama (\ttt{prueba}) a este repositorio.
